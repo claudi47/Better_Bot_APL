@@ -3,8 +3,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from models.betting_data import BettingData
+
 
 def run(category):
+    betting_data = BettingData()
 
     url = 'https://sports.bwin.it/it/sports/calcio-4'
     url_list = {
@@ -61,10 +64,6 @@ def run(category):
             for element in list_ou:
                 new_ou_list.append(element.replace('\n', ''))
 
-            # yield adds the result of the expression to the generator (that is inside general.py)
-            yield day.get_property('textContent').upper() + " -" + ''.join(new_list_digit) + " -" + ''.join(new_ou_list)
-
-
             ms_events = WebDriverWait(driver, 10).until(
                 lambda x: ms_event_group.find_elements(By.CSS_SELECTOR, 'ms-event-group > ms-event'))
 
@@ -90,5 +89,9 @@ def run(category):
                 for element in list_prev_ou:
                     ov_un.append(element)
 
-                yield team1.get_property('textContent') + " -" + team2.get_property('textContent') + " | " + \
-                       ' '.join(quotes) + " | " + gol_ou.get_property('textContent') + ": " + ' '.join(ov_un)
+                betting_data.add_row('bwin', day.get_property('textContent').upper(),
+                                     team1.get_property('textContent') + " -" + team2.get_property('textContent'),
+                                     quotes[0], quotes[1], quotes[2],
+                                     gol_ou.get_property('textContent'), ov_un[0], ov_un[1])
+
+    return betting_data

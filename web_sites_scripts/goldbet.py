@@ -1,7 +1,9 @@
 import requests
+from models.betting_data import BettingData
 
 
 def run(category):
+    betting_data = BettingData()
     url_list = {
         'serie_A': 'https://www.goldbet.it/getOverviewEvents/0?idDiscipline=0&idTournament=93',
         'champions_league': 'https://www.goldbet.it/getOverviewEvents/0?idDiscipline=0&idTournament=26534',
@@ -34,5 +36,7 @@ def run(category):
         for value in ov_values:
             list2_values.append(str(value['ov']))
 
-        yield date + " " + ' - '.join(teams) + " | " + string + ": " + ' '.join(list_values) + " | " + string_ov + \
-              "(2.5): " + ' '.join(list2_values)
+        betting_data.add_row('goldbet', date, ' - '.join(teams), list_values[0], list_values[1], list_values[2],
+                             '2.5', list2_values[1], list2_values[0])
+
+    return betting_data
