@@ -23,14 +23,12 @@ def run(category):
         teams = match['en'].split(' - ')
 
         quotes_1X2 = match['mmkW']['111;355;4001;0;0']
-        string = quotes_1X2['mn']
         quote_values = quotes_1X2['spd']['0.0']['asl']
         list_values = []
         for value in quote_values:
             list_values.append(str(value['ov']))
 
         quotes_ov = match['mmkW']['111;355;4002;0;0']
-        string_ov = quotes_ov['mn']
         ov_values = quotes_ov['spd']['2.5']['asl']
         list2_values = []
         for value in ov_values:
