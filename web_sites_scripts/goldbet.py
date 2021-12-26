@@ -34,7 +34,7 @@ def run(category):
         for value in ov_values:
             list2_values.append(str(value['ov']))
 
-        betting_data.add_row('goldbet', date, ' - '.join(teams), list_values[0], list_values[1], list_values[2],
-                             '2.5', list2_values[1], list2_values[0])
+        betting_data.add_row(date, ' - '.join(teams), list_values[0].replace(",", "."), list_values[1].replace(",", "."), list_values[2].replace(",", "."),
+                             '2.5', list2_values[1].replace(",", "."), list2_values[0].replace(",", "."))
 
     return betting_data

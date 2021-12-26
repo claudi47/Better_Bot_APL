@@ -89,9 +89,9 @@ def run(category):
                 for element in list_prev_ou:
                     ov_un.append(element)
 
-                betting_data.add_row('bwin', day.get_property('textContent').upper(),
+                betting_data.add_row(day.get_property('textContent').upper(),
                                      team1.get_property('textContent') + " -" + team2.get_property('textContent'),
-                                     quotes[0], quotes[1], quotes[2],
-                                     gol_ou.get_property('textContent'), ov_un[0], ov_un[1])
+                                     quotes[0].replace(",", "."), quotes[1].replace(",", "."), quotes[2].replace(",", "."),
+                                     gol_ou.get_property('textContent').replace(",", "."), ov_un[0].replace(",", "."), ov_un[1].replace(",", "."))
 
     return betting_data

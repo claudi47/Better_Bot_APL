@@ -10,9 +10,8 @@ class BettingData:
     def data(self):
         return self._data
 
-    def add_row(self, web_site, date, match, one, ics, two, gol, over, under):
+    def add_row(self, date, match, one, ics, two, gol, over, under):
         self._data.append({
-            "web_site": web_site,
             "date": date,
             "match": match,
             "one": one,
